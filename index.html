@@ -1,58 +1,155 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>All About Us</title>
+    <title>All About Joshua and Emma</title>
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <style>
-      body {
-        background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXMxMTMtYWstNTEyMy1zcy0wMi5qcGc.jpg");
+      :root {
+        --panel-bg: rgba(10,10,14,0.45);
+        --neon-pink: rgba(255,20,147,0.85);
+        --neon-cyan: rgba(0,240,255,0.85);
+        --neon-lime: rgba(150,255,0,0.85);
+        --neon-yellow: rgba(255,240,90,0.85);
       }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      /* Background: multiple neon radial gradients + photo */
+      body {
+        background-image:
+          radial-gradient(circle at 10% 20%, rgba(255,0,150,0.45) 0%, rgba(255,0,150,0.0) 35%),
+          radial-gradient(circle at 30% 60%, rgba(0,240,255,0.35) 0%, rgba(0,240,255,0.0) 30%),
+          radial-gradient(circle at 70% 30%, rgba(150,255,0,0.38) 0%, rgba(150,255,0,0.0) 30%),
+          radial-gradient(circle at 90% 80%, rgba(255,240,90,0.30) 0%, rgba(255,240,90,0.0) 35%),
+          url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXMxMTMtYWstNTEyMy1zcy0wMi5qcGc.jpg");
+        background-size: 30% 30%, 25% 25%, 30% 30%, 35% 35%, cover;
+        background-position: 10% 20%, 30% 60%, 70% 30%, 90% 80%, center;
+        background-repeat: no-repeat;
+        background-blend-mode: screen, screen, screen, screen, normal;
+        animation: glowMove 8s ease-in-out infinite alternate, hueShift 12s linear infinite;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+
+      /* Rotating disco stripes / sparkles overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        background-image:
+          repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 3px, rgba(255,255,255,0.0) 3px 10px),
+          radial-gradient(circle at 20% 20%, var(--neon-pink) 0, transparent 30%),
+          radial-gradient(circle at 80% 80%, var(--neon-cyan) 0, transparent 30%);
+        opacity: 0.95;
+        transform-origin: center;
+        animation: discoRotate 6s linear infinite, shake 0.9s ease-in-out infinite;
+        filter: blur(2px) saturate(1.4);
+      }
+
+      @keyframes glowMove {
+        0% { background-position: 8% 18%, 28% 58%, 68% 28%, 92% 82%, center; }
+        50% { background-position: 12% 22%, 32% 62%, 72% 32%, 88% 78%, center; }
+        100% { background-position: 8% 18%, 28% 58%, 68% 28%, 92% 82%, center; }
+      }
+
+      @keyframes discoRotate {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.02); }
+        100% { transform: rotate(360deg) scale(1); }
+      }
+
+      @keyframes hueShift {
+        0% { filter: hue-rotate(0deg) saturate(1.2); }
+        25% { filter: hue-rotate(45deg) saturate(1.4); }
+        50% { filter: hue-rotate(90deg) saturate(1.6); }
+        75% { filter: hue-rotate(135deg) saturate(1.4); }
+        100% { filter: hue-rotate(180deg) saturate(1.2); }
+      }
+
+      @keyframes shake {
+        0% { transform: translate(0,0) rotate(0deg); }
+        20% { transform: translate(-4px,2px) rotate(-0.5deg); }
+        40% { transform: translate(3px,-3px) rotate(0.6deg); }
+        60% { transform: translate(-2px,2px) rotate(-0.4deg); }
+        80% { transform: translate(2px,-1px) rotate(0.3deg); }
+        100% { transform: translate(0,0) rotate(0deg); }
+      }
+
+      /* Neon text and panels */
       h1 {
         font-family: "Chewy", system-ui;
         text-align: center;
-        font-size: 70px;
-        color: darkblue;
+        font-size: 72px;
+        color: white;
+        margin-top: 18px;
+        text-shadow: 0 0 8px var(--neon-pink), 0 0 20px var(--neon-cyan);
+        animation: neonPulse 2.4s ease-in-out infinite;
       }
+
       h2 {
         font-family: "Chewy", system-ui;
         font-size: 40px;
+        color: white;
+        text-shadow: 0 0 6px var(--neon-lime);
       }
-      h1:hover {
-        background-color: aliceblue;
+
+      @keyframes neonPulse {
+        0% { text-shadow: 0 0 6px var(--neon-pink), 0 0 18px var(--neon-cyan); }
+        50% { text-shadow: 0 0 18px var(--neon-pink), 0 0 36px var(--neon-cyan); }
+        100% { text-shadow: 0 0 6px var(--neon-pink), 0 0 18px var(--neon-cyan); }
       }
+
       p {
-        font-size: 30px;
+        font-size: 28px;
+        color: #f3f7fb;
       }
+
       .us {
         display: flex;
         justify-content: space-around;
+        gap: 20px;
+        padding: 30px;
       }
+
       .lag, .ps199 {
-        background-color: aliceblue;
+        background-color: var(--panel-bg);
         width: 40%;
         border-radius: 20px;
-        padding: 10px;
+        padding: 16px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 0 24px rgba(0,255,255,0.06);
+        backdrop-filter: blur(8px) saturate(1.2);
+        border: 1px solid rgba(255,255,255,0.06);
       }
+
       .lag:hover, .ps199:hover {
-        outline: 3px solid darkblue;
+        outline: 2px solid rgba(255,255,255,0.06);
+        transform: translateY(-6px) scale(1.01);
+        transition: transform 180ms ease;
       }
 
       img {
         width: 30%;
         border-radius: 10px;
+        display: block;
+        margin: 12px auto;
+        filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
       }
     </style>
   </head>
   <body>
-    <h1>All About Us</h1>
+    <h1>All About Joshua and Emma S.</h1>
 
     <div class="us">
       <div class="lag">
         <h2>LaGuardia Student</h2>
-        <p><b>First Name: </b> Jocelyn</p>
+        <p><b>First Name: </b> Joshua </p>
         <p><b>Favorite Subject: </b>Web Development</p>
         <center>
           <img
@@ -72,16 +169,17 @@
       </div>
       <div class="ps199">
         <h2>PS 199 Student</h2>
-        <p><b>First Name: </b> ****Name**** </p>
-        <p><b>Favorite Subject: </b> ****Subject****</p>
+        <p><b>First Name: </b> Emma S. </p>
+        <p> She's crazy and insane and crazy and insane. </p>
+        <p><b>Favorite Subject: </b> Tech </p>
         <center>
           <img src="" />
         </center>
-        <p><b>Favorite Movie: </b> ****Movie****</p>
+        <p><b>Favorite Movie: </b> wicked: for good </p>
         <center>
           <img src="" />
         </center>
-        <p><b>Favorite Book: </b> ****Book****</p>
+        <p><b>Favorite Book: </b> Coraline </p>
         <center>
           <img src="" />
         </center>
